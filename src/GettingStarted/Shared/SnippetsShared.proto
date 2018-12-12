@@ -1,0 +1,22 @@
+﻿// C#: %UserProfile%\.nuget\packages\Grpc.Tools\1.17.0\tools\windows_x64\protoc.exe --csharp_out . --grpc_out . Snippets.proto --plugin=protoc-gen-grpc=%UserProfile%\.nuget\packages\Grpc.Tools\1.17.0\tools\windows_x64\grpc_csharp_plugin.exe
+// Go: protoc snippets.proto --go_out=plugins=grpc:grpc/snippets
+
+syntax = "proto3";
+
+package SnippetsShared;
+
+// The snippet service definition.
+service Snippets {
+  rpc SayHello (SnippetRequest) returns (SnippetResponse) {}
+}
+
+// The request message
+message SnippetRequest {
+  string name = 1;
+  int32 sleep = 2;
+}
+
+// The response message.
+message SnippetResponse {
+  string message = 1;
+}
