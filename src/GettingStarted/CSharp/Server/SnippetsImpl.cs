@@ -11,7 +11,7 @@ namespace Server
         {
             Console.WriteLine("SayHello");
             await Task.Delay(request.Sleep);
-            return new SnippetResponse() { Message = "Hello from C#" };
+            return new SnippetResponse() { Message = "Hello" + request.Name };
         }
     }
 }

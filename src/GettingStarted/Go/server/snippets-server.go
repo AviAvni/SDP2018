@@ -16,14 +16,14 @@ import (
 )
 
 const dateFormat = "2006-01-02 15:04:05"
-const port = ":50051"
+const port = ":888"
 
 type server struct{}
 
-func (s *server) SayHello(ctx context.Context, in *pb.SnippetRequest) (*pb.SnippetResponse, error) {
-	logRequest(in)
-	time.Sleep(time.Duration(in.Sleep) * time.Millisecond)
-	return &pb.SnippetResponse{Message: "Hello " + in.Name}, nil
+func (s *server) SayHello(ctx context.Context, request *pb.SnippetRequest) (*pb.SnippetResponse, error) {
+	log.Println("SayHello")
+	time.Sleep(time.Duration(request.Sleep) * time.Millisecond)
+	return &pb.SnippetResponse{Message: "Hello " + request.Name}, nil
 }
 
 func main() {
@@ -38,8 +38,4 @@ func main() {
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
-}
-
-func logRequest(req *pb.SnippetRequest) {
-	log.Println("tcp snippets request", req.Sleep, " "+time.Now().Format(dateFormat)) // TODO: Middleware
 }

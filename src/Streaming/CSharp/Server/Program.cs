@@ -9,7 +9,7 @@ namespace Server
 
     class Program
     {
-        const int Port = 50051;
+        const int Port = 888;
 
         static async Task Main(string[] args)
         {
@@ -19,6 +19,8 @@ namespace Server
                 Ports = { new ServerPort("localhost", Port, ServerCredentials.Insecure) }
             };
             server.Start();
+
+            Console.WriteLine("Server is up and running...");
 
             var tcs = new TaskCompletionSource<bool>();
 

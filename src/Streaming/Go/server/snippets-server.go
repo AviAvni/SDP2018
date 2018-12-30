@@ -16,7 +16,7 @@ import (
 )
 
 const dateFormat = "2006-01-02 15:04:05"
-const port = ":50051"
+const port = ":888"
 
 type server struct{}
 
@@ -30,9 +30,9 @@ func (s *server) SayHello(stream pb.Snippets_SayHelloServer) error {
 			log.Fatalf("failed to serve: %v", err)
 			return nil
 		}
-		logRequest(msg)
+		log.Println(msg.Name)
 		time.Sleep(time.Duration(msg.Sleep) * time.Millisecond)
-		stream.Send(&pb.SnippetResponse{Message: "Hello " + msg.Name})
+		stream.Send(&pb.SnippetResponse{Message: "Hello from Go to: " + msg.Name})
 	}
 }
 
@@ -48,8 +48,4 @@ func main() {
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
-}
-
-func logRequest(req *pb.SnippetRequest) {
-	log.Println("tcp snippets request", req.Sleep, " "+time.Now().Format(dateFormat)) // TODO: Middleware
 }

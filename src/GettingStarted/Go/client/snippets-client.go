@@ -13,7 +13,7 @@ import (
 	pb "../../Shared"
 )
 
-const address = "localhost:50051"
+const address = "localhost:888"
 
 func main() {
 	// Set up a connection to the server.
